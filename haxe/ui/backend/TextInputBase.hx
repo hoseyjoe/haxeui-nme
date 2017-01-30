@@ -28,6 +28,15 @@ class TextInputBase extends TextDisplayBase {
             }
         });
     }
+
+    public var hscrollPos(get, set):Float;
+    private function get_hscrollPos():Float {
+        return this.scrollH - 1;
+    }
+    private function set_hscrollPos(value:Float):Float {
+        this.scrollH = Std.int(value + 1);
+        return value;
+    }
     
     public var vscrollPos(get, set):Float;
     private function get_vscrollPos():Float {
@@ -37,19 +46,19 @@ class TextInputBase extends TextDisplayBase {
         this.scrollV = Std.int(value + 1);
         return value;
     }
- 
+
     @:getter(textHeight)
     private override function get_textHeight():Float {
         if (multiline == false) {
             var v = super.textHeight;
             return v;
         }
-        
+
         return this.maxScrollV + height - 1;
     }
-    
+
     #if !flash
-    
+
     @:getter(height)
     private override function get_height():Float {
         if (type == TextFieldType.INPUT && multiline == true && Std.is(parentComponent, TextArea)) {
@@ -58,7 +67,7 @@ class TextInputBase extends TextDisplayBase {
         }
         return super.height;
     }
-    
+
     #else
 
     @:getter(height)
@@ -69,6 +78,6 @@ class TextInputBase extends TextDisplayBase {
         }
         return super.height;
     }
-    
+
     #end
 }
